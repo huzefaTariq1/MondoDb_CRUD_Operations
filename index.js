@@ -20,6 +20,7 @@ const courseSchema=new mongoose.Schema({
 const Course=mongoose.model("Course",courseSchema)
 
 
+// function for creating Course
 async function createCourse(){
 // creating object of my Course
 const course=new Course({
@@ -33,7 +34,18 @@ const result=await course.save()
 console.log(result)
 }
 
-createCourse()
+
+
+// function for Geting Course 
+async function getCourses(){
+   const courses= await Course.find()
+   .limit(2)
+   .select({name:1,tags:1})
+   .sort({name:-1})  //-1 for decending order
+   console.log(courses)
+}
+
+getCourses()
 
 
 

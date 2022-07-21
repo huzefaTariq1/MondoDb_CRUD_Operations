@@ -47,18 +47,32 @@ const courses= await Course.find({name:/.*react*./i})
 
 // function for Update
 async function courseUpdate(id){
-   const course=await Course.findById(id)
-   if (!course){
-    console.log("could not find that Id Course")
-    return
-   }
+//    const course=await Course.findById(id)
+//    if (!course){
+//     console.log("could not find that Id Course")
+//     return
+//    }
 
-   course.set({
-    auther:"another another auther"
-   })
+//    course.set({
+//     auther:"another another auther"
+//    })
 
-     const result=await course.save()
-     console.log(result)
+//      const result=await course.save()
+//      console.log(result)
+
+
+
+
+     // second method Document Update First
+    const result= await Course.update({_id:id},{
+    $set:{
+     auther:"again Huzefa",
+     isPublished:true  
+    }
+   })   // here first parameter is query and second parameter is object to update
+   
+   console.log(result)
+
 }
 
 courseUpdate("62d8330c436cc429ed5e7b8b")

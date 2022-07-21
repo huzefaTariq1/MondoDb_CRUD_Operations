@@ -64,14 +64,26 @@ async function courseUpdate(id){
 
 
      // second method Document Update First
-    const result= await Course.update({_id:id},{
-    $set:{
-     auther:"again Huzefa",
-     isPublished:true  
-    }
-   })   // here first parameter is query and second parameter is object to update
+//     const result= await Course.update({_id:id},{
+//     $set:{
+//      auther:"again Huzefa",
+//      isPublished:true  
+//     }
+//    })   // here first parameter is query and second parameter is object to update
    
-   console.log(result)
+//    console.log(result)
+
+
+   
+
+
+           // 3rd method findByIDAndUpdate
+    const course=await Course.findByIdAndUpdate(id,{
+    $set:{
+       isPublished:false
+    }
+   },{new:true})
+   console.log(course)
 
 }
 

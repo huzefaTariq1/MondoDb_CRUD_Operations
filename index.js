@@ -20,8 +20,14 @@ const courseSchema = new mongoose.Schema({
         required: true
     },
     tags: {
-        type: [String],
-        required: true
+        type: Array,
+       // required: true  // seting required true for array create problem bcz its sends empty array to db so for this write custom valdation
+        validate:{
+            validator: function (v){
+                return v && v.length>0
+            },
+            message:"A course should have atleats one value"
+        }
     },
     date: { type: Date, default: Date.now },
     isPublished: {
@@ -51,10 +57,10 @@ async function createCourse() {
     // creating object of my Course
     const course = new Course({
        
-        name: "checking sqeunce React js validation testing checking required function",
+        name: "checking validation for empty array",
         auther: "Huzefa Tariq",
         catagery:"networking",
-        tags: ["React Js", "FrontEnd"],
+        tags: [],
         isPublished: true,
         price:3000
 

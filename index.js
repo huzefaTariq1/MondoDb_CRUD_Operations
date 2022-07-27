@@ -8,11 +8,23 @@ mongoose.connect('mongodb://localhost/playground')
 
 //Defineing Schema
 const courseSchema=new mongoose.Schema({
-    name:String,
-    auther:String,
-    tags:[String],
+    name:{
+       type:String,
+       required:true
+    },
+    auther:{
+        type:String,
+        required:true
+     },
+    tags:{
+        type:[String],
+        required:true
+     },
     date:{type:Date, default:Date.now},
-    isPublished:Boolean
+    isPublished:{
+        type:Boolean,
+        required:true
+     }
 })
 
 
@@ -24,7 +36,7 @@ const Course=mongoose.model("Course",courseSchema)
 async function createCourse(){
 // creating object of my Course
 const course=new Course({
-    name:"React js",
+    name:"React js validation testing",
     auther: "Huzefa Tariq",
     tags:["React Js","FrontEnd"],
     isPublished:true
@@ -33,6 +45,8 @@ const course=new Course({
 const result=await course.save()
 console.log(result)
 }
+
+createCourse()
 
 
 
@@ -96,7 +110,6 @@ async function deleteCourse(id){
     console.log(result)
 }
 
-deleteCourse("62d833871844282a1eeb1031")
 
 
 
